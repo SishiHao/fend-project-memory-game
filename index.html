@@ -16,71 +16,34 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <div class="rateStar">
+              <ul class="stars">
+            		<li><i class="fa fa-star" id="firstStar"></i></li>
+            		<li><i class="fa fa-star" id="secondStar"></i></li>
+            		<li><i class="fa fa-star" id="thirdStar"></i></li>
+            	</ul>
+            	<span class="moves" id="moves">0</span><span id="movesText"> Moves</span>
+            </div>
 
-        	<span class="moves">3</span> Moves
+            <div id="timer">
+              <span id="minutes"></span>:<span id="seconds"></span>
+          	</div>
 
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+            <div class="restart" id="restart">
+              <span id="restartContent">Restart </span><i class="fa fa-repeat"></i>
+            </div>
         </section>
 
-        <ul class="deck">
-            <li class="card">
-                <i class="fa fa-diamond"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
-            </li>
-            <li class="card match">
-                <i class="fa fa-anchor"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-bolt"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-cube"></i>
-            </li>
-            <li class="card match">
-                <i class="fa fa-anchor"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-leaf"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-bicycle"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-diamond"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-bomb"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-leaf"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-bomb"></i>
-            </li>
-            <li class="card open show">
-                <i class="fa fa-bolt"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-bicycle"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-cube"></i>
-            </li>
-        </ul>
+        <ul class="deck"></ul>
     </div>
 
+    <div class="successPopup">
+      <span class="close">&times;</span>
+      <h1 class="popupContent">Congratulations</h1>
+      <button type="button" class="button" id="againButton">Play again!</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
