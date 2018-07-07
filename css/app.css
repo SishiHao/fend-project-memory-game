@@ -49,6 +49,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
+    list-style-type: none;
 }
 
 .deck .card {
@@ -85,10 +86,13 @@ h1 {
  * Styles for the Score Panel
  */
 
+
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 800px;
     margin-bottom: 10px;
+    display: inline-flex;
+    justify-content: space-around;
 }
 
 .score-panel .stars {
@@ -104,6 +108,98 @@ h1 {
 }
 
 .score-panel .restart {
-    float: right;
+  float: right;
     cursor: pointer;
+}
+
+#restart i {
+  padding-left: 5px;
+}
+
+/* after winning */
+
+.successPopup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 0;
+    margin: 0 auto;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Helvetica';
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 1.5s;
+    animation-name: animatetop;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.popupContent {
+  font-size: 3em;
+  padding-top: 4em;
+  color: red;
+  font-weight: bold;
+}
+
+#againButton {
+  background-color: blakc;
+  color: white;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 15px;
+  box-shadow: 7px 7px 30px #999999;
+  transition: box-shadow 0.5s;
+}
+
+.close {
+    color: grey;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+@media only screen and (max-width: 780px) {
+  .deck {
+    max-width: 300px;
+    min-height: auto;
+    padding-bottom: 17px;
+  }
+
+  .deck .card {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 17px;
+  }
+
+  .score-panel {
+    max-width: 70%;
+    padding-bottom: 0;
+    display: block;
+    text-align: center;
+    line-height: 1.7em;
+  }
+
+  h1 {
+    margin: 0;
+    padding: 10px 0;
+  }
 }
