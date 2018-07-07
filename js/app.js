@@ -1,14 +1,25 @@
 /*
  * Create a list that holds all of your cards
  */
+let cards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor","anchor","bolt","bolt","cube","cube","bomb","bomb","leaf","leaf","bicycle","bicycle"];
+let sec = 0;
+let moves = 0;
+let openedCard = [];
+let rateStar = "3";
+let match = 0;
 
+function restartGame() {
+  $("#restart").on("click", function() {
+    location.reload();
+  });
+}
+// Count up timer
+function pad (val) { return val > 9 ? val : "0" + val;}
+setInterval (function() {
+  $("#seconds").html(pad(++sec%60));
+  $("#minutes").html(pad(parseInt(sec/60,10)));
+}, 1000);
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -25,14 +36,84 @@ function shuffle(array) {
     return array;
 }
 
+function createCard() {
+  let cardList = shuffle(cards);
+  cardList.forEach(function(card) {
+    $(".deck").append('<li><i class="card fa fa-' + card + '"></i></li>');
+  });
+}
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+
+//add opened cards to OpenedCards list and check if cards are match or not
+function findMatchedCard() {
+  $(".card").on("click", function() {
+    if ($(this).hasClass("open show")) { return; }
+    $(this).toggleClass("flipInY open show");
+    openedCard.push($(this));
+    var len = openedCard.length;
+    if(len === 2){
+        if(openedCard[0][0].classList[2] === openedCard[1][0].classList[2]){
+          openedCard[0][0].classList.add("match");
+          openedCard[1][0].classList.add("match");
+          moves++;
+          removeOpenCards()
+          winGame();
+        } else {
+          openedCard[0][0].classList.add("unmatched");
+          openedCard[1][0].classList.add("unmatched");
+          setTimeout(removeClasses, 600);
+          setTimeout(removeOpenCards, 700);
+          moves++;
+        }
+    }
+    moveCounter();
+    })
+};
+function removeOpenCards() {
+  openedCard = [];
+}
+function removeClasses() {
+  $(".card").removeClass("show open flipInY bounceIn shake wrong");
+  removeOpenCards();
+}
+
+
+function moveCounter(){
+    if (moves === 1) {
+      $("#movesText").text(" Move");
+    } else {
+      $("#movesText").text(" Moves");
+    }
+    $("#moves").text(moves.toString());
+
+    // setting rates based on moves
+    if (moves >= 1 && moves <= 12) {
+      rateStar = rateStar;
+    } else if (moves > 12 && moves <= 22) {
+      $("#thirdStar").removeClass("fa-star");
+      rateStar = "2";
+    } else if (moves > 22) {
+      $("#secondStar").removeClass("fa-star");
+      rateStar = "1";
+    }
+}
+
+function winGame() {
+  if (match === 16) {
+    var modal = document.getElementsByClassName('successPopup');
+    var span = document.getElementsByClassName('close');
+
+    modal.style.display = "block";
+    span.onclick = function() {
+      modal.style.display = "none";
+    };
+    $("#againButton").on("click", function() {
+      location.reload();
+    });
+  }
+}
+
+shuffle(cards);
+createCard();
+findMatchedCard();
+restartGame()
